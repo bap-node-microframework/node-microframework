@@ -1,0 +1,11 @@
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(require("./core/application"));
+__export(require("./core/container"));
+__export(require("./core/controller"));
+__export(require("./core/eventSuscriber"));
+__export(require("./core/logger"));
+__export(require("./core/module"));
+//# sourceMappingURL=core.js.map
