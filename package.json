@@ -1,0 +1,41 @@
+{
+  "name": "bap-node-microframework",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "lint": "tslint",
+    "start": "concurrent \"npm run tsc\" \"npm run lite\" ",
+    "pretest": "find test -type f -name *.ts | xargs -I {} tsc {} --module commonjs",
+    "test": "npm run pretest && mocha test/**/*.js"
+  },
+  "author": "Cedric LOMBARDOT <cedric@donkeycode.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.1",
+    "config": "^1.16.0",
+    "cors": "^2.7.1",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
+    "express": "^4.13.3",
+    "file-stream-rotator": "0.0.6",
+    "forms": "^1.1.4",
+    "js-yaml": "^3.4.3",
+    "morgan": "^1.6.1",
+    "multer": "^1.1.0",
+    "oauth2-server": "^2.4.1",
+    "orm": "^2.1.27",
+    "sequelize": "^3.19.2",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "faker": "^3.0.1",
+    "should": "^8.2.1",
+    "supertest": "^1.1.0",
+    "typescript": "^1.8"
+  }
+}

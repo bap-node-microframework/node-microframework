@@ -1,0 +1,48 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "outDir": "dist",
+        "rootDir": "src",
+        "noEmitOnError": false,
+        "sourceRoot": "",
+        "inlineSourceMap": false,
+        "inlineSources": false,
+        "noLib": false,
+        "declaration": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "filesGlob": [
+        "src/**/*.ts",
+        "typings/main.d.ts",
+        "custom_typings/main.d.ts",
+        "!node_modules/**"
+    ],
+    "compileOnSave": false,
+    "atom": {
+        "rewriteTsconfig": true,
+        "formatOnSave": true
+    },
+    "files": [
+        "src/core/application.ts",
+        "src/core/container.ts",
+        "src/core/controller.ts",
+        "src/core/eventSuscriber.ts",
+        "src/core/logger.ts",
+        "src/core/module.ts",
+        "src/decorators/events.decorators.ts",
+        "src/decorators/paramconverter.decorators.ts",
+        "src/decorators/routing.decorators.ts",
+        "src/decorators/security.decorators.ts",
+        "typings/main.d.ts",
+        "custom_typings/main.d.ts"
+    ]
+}
