@@ -33,6 +33,7 @@
     },
     "files": [
         "src/core.ts",
+        "src/decorators.ts",
         "typings/main.d.ts",
         "custom_typings/main.d.ts"
     ]
