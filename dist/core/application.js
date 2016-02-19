@@ -4,7 +4,6 @@ var logger_1 = require("./logger");
 var container_1 = require('./container');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var kernel_1 = require('../../kernel');
 var multer = require("multer");
 var config = require('config');
 var Sequelize = require('sequelize');
@@ -33,7 +32,7 @@ var Application = (function () {
                 }
             });
         }
-        new kernel_1.default(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
+        new Kernel(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
         if (options.oauth) {
             this.registerOauthErrorHandler();
         }

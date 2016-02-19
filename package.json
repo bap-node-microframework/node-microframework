@@ -2,7 +2,7 @@
   "name": "bap-node-microframework",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",

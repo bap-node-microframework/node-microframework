@@ -21,7 +21,7 @@
         "node_modules"
     ],
     "filesGlob": [
-        "src/**/*.ts",
+        "src/*.ts",
         "typings/main.d.ts",
         "custom_typings/main.d.ts",
         "!node_modules/**"
@@ -32,16 +32,7 @@
         "formatOnSave": true
     },
     "files": [
-        "src/core/application.ts",
-        "src/core/container.ts",
-        "src/core/controller.ts",
-        "src/core/eventSuscriber.ts",
-        "src/core/logger.ts",
-        "src/core/module.ts",
-        "src/decorators/events.decorators.ts",
-        "src/decorators/paramconverter.decorators.ts",
-        "src/decorators/routing.decorators.ts",
-        "src/decorators/security.decorators.ts",
+        "src/core.ts",
         "typings/main.d.ts",
         "custom_typings/main.d.ts"
     ]

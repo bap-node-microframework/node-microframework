@@ -3,7 +3,6 @@ import { Logger } from "./logger";
 import { Container } from './container';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
-import Kernel from '../../kernel';
 import * as multer from "multer";
 import * as config from 'config';
 import * as Sequelize from 'sequelize';

@@ -29,9 +29,5 @@
     "atom": {
         "rewriteTsconfig": true
     },
-    "files": [
-        "app/app.ts",
-        "typings/main.d.ts",
-        "custom_typings/main.d.ts"
-    ]
+    "files": []
 }
