@@ -1,3 +1,4 @@
+/// <reference path="../typings/main.d.ts" />
 export * from "./decorators/events.decorators";
 export * from "./decorators/paramconverter.decorators";
 export * from "./decorators/routing.decorators";

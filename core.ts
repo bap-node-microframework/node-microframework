@@ -1,3 +1,5 @@
+/// <reference path="./typings/main.d.ts" />
+
 export * from "./dist/core/application"
 export * from "./dist/core/container"
 export * from "./dist/core/controller"
