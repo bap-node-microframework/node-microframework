@@ -8,8 +8,7 @@
     "tsc:w": "tsc -w",
     "lite": "lite-server",
     "lint": "tslint",
-    "start": "concurrent \"npm run tsc\" \"npm run lite\" ",
-    "pretest": "find test -type f -name *.ts | xargs -I {} tsc {} --module commonjs",
+    "build": "npm run tsc && find . -type f -depth 1 -name '*.ts' | xargs -I {} tsc {} --declaration --module commonjs",
     "test": "npm run pretest && mocha test/**/*.js"
   },
   "author": "Cedric LOMBARDOT <cedric@donkeycode.com>",

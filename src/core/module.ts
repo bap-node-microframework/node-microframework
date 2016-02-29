@@ -1,9 +1,10 @@
+import * as Sequelize from 'sequelize';
 
 export abstract class Module {
-    app:any;
-    sequelize:Sequelize.Instance;
+    app: any;
+    sequelize: Sequelize.Sequelize;
 
-    constructor(app:any, sequelize:Sequelize.Instance, io:SocketIO.Server) {
+    constructor(app: any, sequelize: Sequelize.Sequelize, io: SocketIO.Server) {
         this.app = app;
         this.sequelize = sequelize;
 

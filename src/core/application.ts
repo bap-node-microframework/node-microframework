@@ -10,8 +10,9 @@ import * as SocketIO from "socket.io";
 import * as Http from "http";
 import * as express from "express";
 import * as path from 'path';
+import { KernelInterface } from './KernelInterface'
 
-interface ApplicationOptions {
+export interface ApplicationOptions {
     cors: boolean,
     sockets: boolean,
     oauth: boolean,
@@ -19,10 +20,10 @@ interface ApplicationOptions {
 }
 
 export class Application {
-    app:express.Express;
-    httpServer:Http.Server
+    app: express.Express;
+    httpServer: Http.Server
 
-    constructor(options:ApplicationOptions) {
+    constructor(options: ApplicationOptions, kernel: KernelInterface) {
         this.app = express();
         this.httpServer = Http.createServer(this.app);
 
@@ -42,13 +43,14 @@ export class Application {
 
         if (options.orm) {
             // Register DB
-            var sequelize = new Sequelize(config.get('orm.dsn').toString(), { define: {
+            var sequelize = new Sequelize(config.get('orm.dsn').toString(), {
+                define: {
                     timestamps: false
                 }
             });
         }
 
-        new Kernel(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
+        kernel.boot(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
 
         if (options.oauth) {
             this.registerOauthErrorHandler()

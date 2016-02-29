@@ -12,7 +12,7 @@ var Http = require("http");
 var express = require("express");
 var path = require('path');
 var Application = (function () {
-    function Application(options) {
+    function Application(options, kernel) {
         this.app = express();
         this.httpServer = Http.createServer(this.app);
         container_1.Container.setParameter('rootDirectory', container_1.Container.getParameter('appDirectory') + path.sep + '..');
@@ -27,12 +27,13 @@ var Application = (function () {
         }
         if (options.orm) {
             // Register DB
-            var sequelize = new Sequelize(config.get('orm.dsn').toString(), { define: {
+            var sequelize = new Sequelize(config.get('orm.dsn').toString(), {
+                define: {
                     timestamps: false
                 }
             });
         }
-        new Kernel(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
+        kernel.boot(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
         if (options.oauth) {
             this.registerOauthErrorHandler();
         }
