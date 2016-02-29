@@ -8,3 +8,4 @@ __export(require("./dist/core/controller"));
 __export(require("./dist/core/eventSuscriber"));
 __export(require("./dist/core/logger"));
 __export(require("./dist/core/module"));
+__export(require("./dist/core/KernelInterface"));
