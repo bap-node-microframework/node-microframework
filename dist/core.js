@@ -8,4 +8,5 @@ __export(require("./core/controller"));
 __export(require("./core/eventSuscriber"));
 __export(require("./core/logger"));
 __export(require("./core/module"));
+__export(require("./core/KernelInterface"));
 //# sourceMappingURL=core.js.map
