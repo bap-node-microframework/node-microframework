@@ -15,6 +15,6 @@ export declare class Application {
     private registerParsers();
     private registerLogger();
     private registerCors();
-    private registerSoketIO();
+    private registerSocketIO();
     private registerOauthErrorHandler();
 }

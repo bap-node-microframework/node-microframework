@@ -1,9 +1,9 @@
 
-export abstract class EventSuscriber {
-    static eventListeners:any = {}
+export abstract class EventSubscriber {
+    static eventListeners: any = {}
 
     static registerEventListeners(dispatcher) {
-        for (var event in this.eventListeners) {
+        for (var event in this.eventListeners) {
             let on = this.eventListeners[event];
 
             dispatcher.on(event, function onEvent() {

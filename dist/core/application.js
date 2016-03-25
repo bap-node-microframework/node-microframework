@@ -23,7 +23,7 @@ var Application = (function () {
             this.registerCors();
         }
         if (options.sockets) {
-            var io = this.registerSoketIO();
+            var io = this.registerSocketIO();
         }
         if (options.orm) {
             // Register DB
@@ -62,7 +62,7 @@ var Application = (function () {
         };
         this.app.use(cors(corsOptions));
     };
-    Application.prototype.registerSoketIO = function () {
+    Application.prototype.registerSocketIO = function () {
         var io = SocketIO(this.httpServer);
         container_1.Container.registerService('io', io);
         return io;

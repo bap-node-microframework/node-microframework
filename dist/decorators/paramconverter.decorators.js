@@ -1,7 +1,5 @@
 "use strict";
-var express = require("express");
 var container_1 = require('../core/container');
-var router = express.Router();
 function ParamConverter() {
     var getArgs = [];
     for (var _i = 0; _i < arguments.length; _i++) {

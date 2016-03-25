@@ -1,8 +1,6 @@
 import * as express from "express";
 import { Container } from '../core/container';
 
-let router = express.Router();
-
 export function ParamConverter(...getArgs) {
     let aName = getArgs[0];
     let options = getArgs[1];

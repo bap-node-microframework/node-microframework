@@ -10,7 +10,7 @@ import * as SocketIO from "socket.io";
 import * as Http from "http";
 import * as express from "express";
 import * as path from 'path';
-import { KernelInterface } from './KernelInterface'
+import { KernelInterface } from './KernelInterface';
 
 export interface ApplicationOptions {
     cors: boolean,
@@ -38,7 +38,7 @@ export class Application {
         }
 
         if (options.sockets) {
-            var io = this.registerSoketIO();
+            var io = this.registerSocketIO();
         }
 
         if (options.orm) {
@@ -86,7 +86,7 @@ export class Application {
         this.app.use(cors(corsOptions));
     }
 
-    private registerSoketIO() {
+    private registerSocketIO() {
         let io = SocketIO(this.httpServer);
         Container.registerService('io', io);
 

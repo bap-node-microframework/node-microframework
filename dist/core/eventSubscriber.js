@@ -1,8 +1,8 @@
 "use strict";
-var EventSuscriber = (function () {
-    function EventSuscriber() {
+var EventSubscriber = (function () {
+    function EventSubscriber() {
     }
-    EventSuscriber.registerEventListeners = function (dispatcher) {
+    EventSubscriber.registerEventListeners = function (dispatcher) {
         var _loop_1 = function() {
             var on = this_1.eventListeners[event];
             dispatcher.on(event, function onEvent() {
@@ -16,8 +16,8 @@ var EventSuscriber = (function () {
             _loop_1();
         }
     };
-    EventSuscriber.eventListeners = {};
-    return EventSuscriber;
+    EventSubscriber.eventListeners = {};
+    return EventSubscriber;
 }());
-exports.EventSuscriber = EventSuscriber;
-//# sourceMappingURL=eventSuscriber.js.map
+exports.EventSubscriber = EventSubscriber;
+//# sourceMappingURL=eventSubscriber.js.map
