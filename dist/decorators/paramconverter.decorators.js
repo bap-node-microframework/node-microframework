@@ -7,7 +7,7 @@ function ParamConverter() {
     }
     var aName = getArgs[0];
     var options = getArgs[1];
-    return function (target, name, descriptor) {
+    return function converter(target, name, descriptor) {
         var oldValue = descriptor.value;
         descriptor.value = function (req, res) {
             var findOptions = {};
