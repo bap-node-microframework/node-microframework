@@ -14,18 +14,18 @@ function RequestParam() {
         var oldValue = descriptor.value;
         descriptor.value = function (req, res) {
             // param not nullable and null => error
-            if (!isNullable && !req.param[aName]) {
+            if (!isNullable && !req.params[aName]) {
                 return res.status(400).json({
                     error: "parameter " + aName + " is required"
                 });
             }
             // param not nullable and not valid => error
-            if (!isNullable && !_[requirements](req.query[aName])) {
+            if (!isNullable && !_[requirements](req.params[aName])) {
                 return res.status(400).json({
                     error: "parameter " + aName + " should typeof " + requirements
                 });
             }
-            if (isNullable && !req.query[aName]) {
+            if (isNullable && !req.params[aName]) {
                 req.query[aName] = defaultValue;
             }
             return oldValue(req, res);
