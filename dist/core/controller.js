@@ -7,19 +7,19 @@ var BaseController = (function () {
         if (typeof model === "string") {
             model = container_1.Container.getModel(model).build();
         }
-        BaseController.processForm(model, form, request, response, 'post');
+        BaseController.processForm(model, form, request, response);
     };
     BaseController.prototype.put = function (model, form, request, response) {
-        BaseController.processForm(model, form, request, response, 'put');
+        BaseController.processForm(model, form, request, response);
     };
-    BaseController.processForm = function (model, form, request, response, method) {
+    BaseController.processForm = function (model, form, request, response) {
         form.handle(request, {
             success: function (form) {
                 Object.keys(form.data).forEach(function (key) {
                     model[key] = form.data[key];
                 });
                 model.save().then(function (savedModel) {
-                    if (method === 'put') {
+                    if (request.method === 'PUT') {
                         return response.status(204).send();
                     }
                     return response.status(201).send(savedModel);

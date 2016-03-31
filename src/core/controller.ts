@@ -11,14 +11,14 @@ export abstract class BaseController {
             model = Container.getModel(model).build();
         }
 
-        BaseController.processForm(model, form, request, response, 'post');
+        BaseController.processForm(model, form, request, response);
     }
 
     put(model: any, form: any, request: any, response: any) {
-        BaseController.processForm(model, form, request, response, 'put');
+        BaseController.processForm(model, form, request, response);
     }
 
-    static processForm(model: any, form: any, request: any, response: any, method: string) {
+    static processForm(model: any, form: any, request: any, response: any) {
         form.handle(request, {
             success: (form) => {
                 Object.keys(form.data).forEach((key) => {
@@ -27,7 +27,7 @@ export abstract class BaseController {
 
                 model.save().then(
                     savedModel => {
-                        if (method === 'put') {
+                        if (request.method === 'PUT') {
                             return response.status(204).send();
                         }
 
