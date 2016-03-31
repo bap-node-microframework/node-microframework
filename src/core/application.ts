@@ -48,9 +48,10 @@ export class Application {
                     timestamps: false
                 }
             });
+            Container.registerService('sequelize', sequelize);
         }
 
-        kernel.boot(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
+        kernel.boot(this.app, options.sockets ? io : null);
 
         if (options.oauth) {
             this.registerOauthErrorHandler()

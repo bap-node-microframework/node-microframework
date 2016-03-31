@@ -32,8 +32,9 @@ var Application = (function () {
                     timestamps: false
                 }
             });
+            container_1.Container.registerService('sequelize', sequelize);
         }
-        kernel.boot(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
+        kernel.boot(this.app, options.sockets ? io : null);
         if (options.oauth) {
             this.registerOauthErrorHandler();
         }

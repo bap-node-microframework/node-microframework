@@ -1,8 +1,10 @@
 import { Container } from './container';
+import * as Sequelize from 'sequelize';
 
 export abstract class BaseController {
     req: any;
     res: any;
+    sequelize: Sequelize.Sequelize;
 
     static router: any;
 
