@@ -28,6 +28,7 @@ var Application = (function () {
         if (options.orm) {
             // Register DB
             var sequelize = new Sequelize(config.get('orm.dsn').toString(), {
+                logging: (process.env.DEBUG || config.get('orm.debug')) ? console.log : false,
                 define: {
                     timestamps: false
                 }
