@@ -1,5 +1,4 @@
 "use strict";
-var _ = require("lodash");
 function RequestParam() {
     var getArgs = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -20,11 +19,15 @@ function RequestParam() {
                 });
             }
             // param not nullable and not valid => error
-            if (!isNullable && !_[requirements](req.params[aName])) {
-                return res.status(400).json({
-                    error: "parameter " + aName + " should typeof " + requirements
-                });
+            if (requirements) {
+                var regex = new RegExp(requirements, "gi");
+                if (!isNullable && !regex.test(req.params[aName])) {
+                    return res.status(400).json({
+                        error: "parameter " + aName + " match " + requirements
+                    });
+                }
             }
+            // isNullable and null => default value
             if (isNullable && !req.params[aName]) {
                 req.query[aName] = defaultValue;
             }
