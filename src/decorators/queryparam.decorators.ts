@@ -24,7 +24,7 @@ export function QueryParam(...getArgs) {
             // param not empty and not valid => error
             if (requirements) {
                 let regex = new RegExp(requirements, "g");
-                if (!req.query[aName] && !regex.test(req.query[aName])) {
+                if (req.query[aName] && !regex.test(req.query[aName])) {
                     return res.status(400).json({
                         error: "parameter " + aName + " match " + requirements
                     });

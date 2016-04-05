@@ -21,7 +21,7 @@ function RequestParam() {
             // param not nullable and not valid => error
             if (requirements) {
                 var regex = new RegExp(requirements, "g");
-                if (!req.params[aName] && !regex.test(req.params[aName])) {
+                if (req.params[aName] && !regex.test(req.params[aName])) {
                     return res.status(400).json({
                         error: "parameter " + aName + " match " + requirements
                     });
