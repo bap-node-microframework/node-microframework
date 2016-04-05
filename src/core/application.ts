@@ -47,6 +47,9 @@ export class Application {
                 logging: (process.env.DEBUG || config.get('orm.debug')) ? console.log : false,
                 define: {
                     timestamps: false
+                },
+                dialectOptions: {
+                    multipleStatements: true
                 }
             });
             Container.registerService('sequelize', sequelize);
