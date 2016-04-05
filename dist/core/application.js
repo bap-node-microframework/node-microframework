@@ -11,6 +11,7 @@ var SocketIO = require("socket.io");
 var Http = require("http");
 var express = require("express");
 var path = require('path');
+var ContinuationLocalStorage = require("continuation-local-storage");
 var Application = (function () {
     function Application(options, kernel) {
         this.app = express();
@@ -33,6 +34,11 @@ var Application = (function () {
                     timestamps: false
                 }
             });
+            if (config.has('orm.cls_namespace')) {
+                var namespaceName = config.get('orm.cls_namespace').toString();
+                var clsNamespace = ContinuationLocalStorage.createNamespace(namespaceName);
+                Sequelize.cls = clsNamespace;
+            }
             container_1.Container.registerService('sequelize', sequelize);
         }
         kernel.boot(this.app, options.sockets ? io : null);

@@ -11,6 +11,7 @@ import * as Http from "http";
 import * as express from "express";
 import * as path from 'path';
 import { KernelInterface } from './KernelInterface';
+import * as ContinuationLocalStorage from "continuation-local-storage";
 
 export interface ApplicationOptions {
     cors: boolean,
@@ -49,6 +50,13 @@ export class Application {
                     timestamps: false
                 }
             });
+
+            if (config.has('orm.cls_namespace')) {
+                let namespaceName:string = config.get('orm.cls_namespace').toString();
+                let clsNamespace = ContinuationLocalStorage.createNamespace(namespaceName);
+                Sequelize.cls = clsNamespace;
+            }
+
             Container.registerService('sequelize', sequelize);
         }
 
