@@ -4,6 +4,8 @@ function __export(m) {
 }
 __export(require("./decorators/events.decorators"));
 __export(require("./decorators/paramconverter.decorators"));
+__export(require("./decorators/queryparam.decorators"));
+__export(require("./decorators/requestparam.decorators"));
 __export(require("./decorators/routing.decorators"));
 __export(require("./decorators/security.decorators"));
 //# sourceMappingURL=decorators.js.map

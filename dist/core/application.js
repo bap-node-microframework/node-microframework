@@ -23,17 +23,19 @@ var Application = (function () {
             this.registerCors();
         }
         if (options.sockets) {
-            var io = this.registerSoketIO();
+            var io = this.registerSocketIO();
         }
         if (options.orm) {
             // Register DB
             var sequelize = new Sequelize(config.get('orm.dsn').toString(), {
+                logging: (process.env.DEBUG || config.get('orm.debug')) ? console.log : false,
                 define: {
                     timestamps: false
                 }
             });
+            container_1.Container.registerService('sequelize', sequelize);
         }
-        kernel.boot(this.app, options.orm ? sequelize : null, options.sockets ? io : null);
+        kernel.boot(this.app, options.sockets ? io : null);
         if (options.oauth) {
             this.registerOauthErrorHandler();
         }
@@ -62,7 +64,7 @@ var Application = (function () {
         };
         this.app.use(cors(corsOptions));
     };
-    Application.prototype.registerSoketIO = function () {
+    Application.prototype.registerSocketIO = function () {
         var io = SocketIO(this.httpServer);
         container_1.Container.registerService('io', io);
         return io;

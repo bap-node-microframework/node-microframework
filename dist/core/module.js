@@ -1,9 +1,10 @@
 "use strict";
+var container_1 = require('./container');
 var Module = (function () {
-    function Module(app, sequelize, io) {
+    function Module(app, io) {
         var _this = this;
         this.app = app;
-        this.sequelize = sequelize;
+        this.sequelize = container_1.Container.get('sequelize');
         this.registerServices();
         this.registerControllers();
         this.registerModels();

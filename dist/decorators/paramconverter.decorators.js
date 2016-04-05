@@ -1,7 +1,5 @@
 "use strict";
-var express = require("express");
 var container_1 = require('../core/container');
-var router = express.Router();
 function ParamConverter() {
     var getArgs = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -9,7 +7,7 @@ function ParamConverter() {
     }
     var aName = getArgs[0];
     var options = getArgs[1];
-    return function (target, name, descriptor) {
+    return function converter(target, name, descriptor) {
         var oldValue = descriptor.value;
         descriptor.value = function (req, res) {
             var findOptions = {};

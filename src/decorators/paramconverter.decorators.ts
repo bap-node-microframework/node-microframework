@@ -1,13 +1,11 @@
 import * as express from "express";
 import { Container } from '../core/container';
 
-let router = express.Router();
-
 export function ParamConverter(...getArgs) {
     let aName = getArgs[0];
     let options = getArgs[1];
 
-    return function(target, name, descriptor) {
+    return function converter(target, name, descriptor) {
         let oldValue = descriptor.value;
 
         descriptor.value = (req, res) => {
@@ -23,7 +21,7 @@ export function ParamConverter(...getArgs) {
                 });
             }
 
-            Container.getModel(options.model).findOne({ where: findOptions }).then(data =>  {
+            Container.getModel(options.model).findOne({ where: findOptions }).then(data => {
                 if (!data) {
                     return res.status(404).json({
                         error: "Cant find " + options.model + " with " + JSON.stringify(findOptions)
