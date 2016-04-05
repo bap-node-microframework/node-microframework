@@ -21,10 +21,10 @@ export function QueryParam(...getArgs) {
                 });
             }
 
-            // param not nullable and not valid => error
+            // param not empty and not valid => error
             if (requirements) {
-                let regex = new RegExp(requirements, "gi");
-                if (!isNullable && !regex.test(req.query[aName])) {
+                let regex = new RegExp(requirements, "g");
+                if (!req.query[aName] && !regex.test(req.query[aName])) {
                     return res.status(400).json({
                         error: "parameter " + aName + " match " + requirements
                     });

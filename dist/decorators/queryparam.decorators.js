@@ -18,10 +18,10 @@ function QueryParam() {
                     error: "parameter " + aName + " is required"
                 });
             }
-            // param not nullable and not valid => error
+            // param not empty and not valid => error
             if (requirements) {
-                var regex = new RegExp(requirements, "gi");
-                if (!isNullable && !regex.test(req.query[aName])) {
+                var regex = new RegExp(requirements, "g");
+                if (!req.query[aName] && !regex.test(req.query[aName])) {
                     return res.status(400).json({
                         error: "parameter " + aName + " match " + requirements
                     });
