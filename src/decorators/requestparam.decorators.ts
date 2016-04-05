@@ -1,6 +1,5 @@
 import * as express from "express";
 import { Container } from "../core/container";
-import * as _  from "lodash";
 
 export function RequestParam(...getArgs) {
 
@@ -23,12 +22,16 @@ export function RequestParam(...getArgs) {
             }
 
             // param not nullable and not valid => error
-            if (!isNullable && !_[requirements](req.params[aName])) {
-                return res.status(400).json({
-                    error: "parameter " + aName + " should typeof " + requirements
-                });
+            if (requirements) {
+                let regex = new RegExp(requirements, "g");
+                if (req.params[aName] && !regex.test(req.params[aName])) {
+                    return res.status(400).json({
+                        error: "parameter " + aName + " match " + requirements
+                    });
+                }
             }
 
+            // isNullable and null => default value
             if (isNullable && !req.params[aName]) {
                 req.query[aName] = defaultValue;
             }
