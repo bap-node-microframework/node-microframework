@@ -31,6 +31,9 @@ var Application = (function () {
                 logging: (process.env.DEBUG || config.get('orm.debug')) ? console.log : false,
                 define: {
                     timestamps: false
+                },
+                dialectOptions: {
+                    multipleStatements: true
                 }
             });
             container_1.Container.registerService('sequelize', sequelize);
