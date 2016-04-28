@@ -23,7 +23,7 @@ function QueryParam() {
                 var regex = new RegExp(requirements, "g");
                 if (req.query[aName] && !regex.test(req.query[aName])) {
                     return res.status(400).json({
-                        error: "parameter " + aName + " match " + requirements
+                        error: "parameter " + aName + " should match " + requirements
                     });
                 }
             }
