@@ -1,5 +1,5 @@
 {
-  "ambientDependencies": {
+  "globalDependencies": {
     "Q": "github:DefinitelyTyped/DefinitelyTyped/q/Q.d.ts#aae1368c8ee377f6e9c59c2d6faf1acb3ece7e05",
     "bcrypt": "github:DefinitelyTyped/DefinitelyTyped/bcrypt/bcrypt.d.ts#30f566d3c9569cbfa6a97da863bdfa58853ca29a",
     "bluebird": "github:DefinitelyTyped/DefinitelyTyped/bluebird/bluebird.d.ts#8d852210cf8378ac5fe11380b5d1d17f2e5b0968",
@@ -8,6 +8,7 @@
     "cors": "github:DefinitelyTyped/DefinitelyTyped/cors/cors.d.ts#ee872c633411d2524cafc68d339f016acbfa1fd6",
     "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#dd4626a4e23ce8d6d175e0fe8244a99771c8c3f2",
     "js-yaml": "github:DefinitelyTyped/DefinitelyTyped/js-yaml/js-yaml.d.ts#52318243888c4aa02b3c0b5e68631577728ffcf8",
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#d456e7ccb07a53c47bdd63957e8785402c19c579",
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#cb5206a8ac1c9a3ddfd126f5ecea6729b2361452",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#d6dd320291705694ba8e1a79497a908e9f5e6617",
     "morgan": "github:DefinitelyTyped/DefinitelyTyped/morgan/morgan.d.ts#4566a913a3667dc627851d0f7f38ffcd0e7cf6ea",
