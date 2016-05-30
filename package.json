@@ -8,7 +8,7 @@
     "tsc:w": "tsc -w",
     "lite": "lite-server",
     "lint": "tslint",
-    "build": "npm run tsc && find . -type f -depth 1 -name '*.ts' | xargs -I {} tsc {} typings/main.d.ts custom_typings/main.d.ts --declaration --module commonjs",
+    "build": "npm run tsc && find . -type f -depth 1 -name '*.ts' | xargs -I {} tsc {} typings/index.d.ts custom_typings/main.d.ts --declaration --module commonjs",
     "test": "npm run pretest && mocha test/**/*.js"
   },
   "author": "Cedric LOMBARDOT <cedric@donkeycode.com>",
