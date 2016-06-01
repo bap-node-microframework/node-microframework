@@ -3,9 +3,26 @@ var container_1 = require('./container');
 var BaseController = (function () {
     function BaseController() {
     }
+    BaseController.prototype.cget = function (res, model) {
+        var getModel = container_1.Container.getModel(model);
+        if (container_1.Container.getParameter('odm')) {
+            getModel.find().then(function (data) { res.status(200).json(data); }, function (err) { res.status(404).json({ error: err }); });
+        }
+        else {
+            getModel.findAll().then(function (data) { res.status(200).json(data); }, function (err) { res.status(404).json({ error: err }); });
+        }
+    };
     BaseController.prototype.post = function (model, form, request, response) {
+        var postModel;
+        if (container_1.Container.getParameter('odm')) {
+            var tmp = container_1.Container.getModel(model);
+            postModel = new tmp({});
+        }
+        else {
+            postModel = container_1.Container.getModel(model).build();
+        }
         if (typeof model === "string") {
-            model = container_1.Container.getModel(model).build();
+            model = postModel;
         }
         BaseController.processForm(model, form, request, response);
     };
@@ -34,7 +51,12 @@ var BaseController = (function () {
         });
     };
     BaseController.prototype.delete = function (res, object) {
-        object.destroy().then(function () { res.status(204).send(); }, function (err) { res.status(500).json({ error: err }); });
+        if (container_1.Container.getParameter('odm')) {
+            object.remove().then(function () { res.status(204).send(); }, function (err) { res.status(500).json({ error: err }); });
+        }
+        else {
+            object.destroy().then(function () { res.status(204).send(); }, function (err) { res.status(500).json({ error: err }); });
+        }
     };
     return BaseController;
 }());

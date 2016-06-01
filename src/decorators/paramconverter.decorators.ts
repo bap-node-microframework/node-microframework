@@ -4,6 +4,7 @@ import { Container } from '../core/container';
 export function ParamConverter(...getArgs) {
     let aName = getArgs[0];
     let options = getArgs[1];
+    let query = {};
 
     return function converter(target, name, descriptor) {
         let oldValue = descriptor.value;
@@ -21,10 +22,17 @@ export function ParamConverter(...getArgs) {
                 });
             }
 
-            Container.getModel(options.model).findOne({ where: findOptions }).then(data => {
+            if (Container.getParameter('odm')) {
+                query = findOptions;
+            }
+            else {
+                query = { where: findOptions };
+            }
+
+            Container.getModel(options.model).findOne(query).then(data => {
                 if (!data) {
                     return res.status(404).json({
-                        error: "Cant find " + options.model + " with " + JSON.stringify(findOptions)
+                        error: "Cannot find " + options.model + " with " + JSON.stringify(findOptions)
                     });
                 }
 

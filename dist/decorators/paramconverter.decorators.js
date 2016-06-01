@@ -7,6 +7,7 @@ function ParamConverter() {
     }
     var aName = getArgs[0];
     var options = getArgs[1];
+    var query = {};
     return function converter(target, name, descriptor) {
         var oldValue = descriptor.value;
         descriptor.value = function (req, res) {
@@ -21,10 +22,16 @@ function ParamConverter() {
                     findOptions[col] = req.params[options.filterBy[col]] || req.query[options.filterBy[col]];
                 });
             }
-            container_1.Container.getModel(options.model).findOne({ where: findOptions }).then(function (data) {
+            if (container_1.Container.getParameter('odm')) {
+                query = findOptions;
+            }
+            else {
+                query = { where: findOptions };
+            }
+            container_1.Container.getModel(options.model).findOne(query).then(function (data) {
                 if (!data) {
                     return res.status(404).json({
-                        error: "Cant find " + options.model + " with " + JSON.stringify(findOptions)
+                        error: "Cannot find " + options.model + " with " + JSON.stringify(findOptions)
                     });
                 }
                 req.params[aName] = data;

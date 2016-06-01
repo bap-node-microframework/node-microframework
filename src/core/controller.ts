@@ -7,12 +7,40 @@ export abstract class BaseController {
     res: any;
     sequelize: Sequelize.Sequelize;
     mongoose: Mongoose.Mongoose;
+    postModel: any;
 
     static router: any;
 
+    cget(res: any, model: any) {
+        let getModel = Container.getModel(model);
+
+        if (Container.getParameter('odm')) {
+            getModel.find().then(
+                (data) => { res.status(200).json(data) },
+                (err) => { res.status(404).json({ error: err }); }
+            );
+        }
+        else {
+            getModel.findAll().then(
+                (data) => { res.status(200).json(data) },
+                (err) => { res.status(404).json({ error: err }); }
+            );
+        }
+    }
+
     post(model: any, form: any, request: any, response: any) {
+        let postModel;
+
+        if (Container.getParameter('odm')) {
+            let tmp = Container.getModel(model);
+            postModel = new tmp({});
+        }
+        else {
+            postModel = Container.getModel(model).build();
+        }
+
         if (typeof model === "string") {
-            model = Container.getModel(model).build();
+            model = postModel;
         }
 
         BaseController.processForm(model, form, request, response);
@@ -50,9 +78,17 @@ export abstract class BaseController {
     }
 
     delete(res, object) {
-        object.destroy().then(
-            () => { res.status(204).send() },
-            (err) => { res.status(500).json({ error: err }); }
-        );
+        if (Container.getParameter('odm')) {
+            object.remove().then(
+                () => { res.status(204).send() },
+                (err) => { res.status(500).json({ error: err }); }
+            );
+        }
+        else {
+            object.destroy().then(
+                () => { res.status(204).send() },
+                (err) => { res.status(500).json({ error: err }); }
+            );
+        }
     }
 }
