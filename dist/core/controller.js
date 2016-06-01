@@ -3,6 +3,11 @@ var container_1 = require('./container');
 var BaseController = (function () {
     function BaseController() {
     }
+    BaseController.prototype.get = function (res, model) {
+        if (typeof model !== "string") {
+            res.status(200).json(model);
+        }
+    };
     BaseController.prototype.cget = function (res, model) {
         var getModel = container_1.Container.getModel(model);
         if (container_1.Container.getParameter('odm')) {

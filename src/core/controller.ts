@@ -11,6 +11,12 @@ export abstract class BaseController {
 
     static router: any;
 
+    get(res: any, model: any) {
+        if (typeof model !== "string") {
+            res.status(200).json(model);
+        }
+    }
+
     cget(res: any, model: any) {
         let getModel = Container.getModel(model);
 

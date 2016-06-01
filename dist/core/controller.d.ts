@@ -7,6 +7,7 @@ export declare abstract class BaseController {
     mongoose: Mongoose.Mongoose;
     postModel: any;
     static router: any;
+    get(res: any, model: any): void;
     cget(res: any, model: any): void;
     post(model: any, form: any, request: any, response: any): void;
     put(model: any, form: any, request: any, response: any): void;
