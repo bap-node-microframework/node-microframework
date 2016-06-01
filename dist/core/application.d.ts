@@ -6,6 +6,7 @@ export interface ApplicationOptions {
     sockets: boolean;
     oauth: boolean;
     orm: boolean;
+    odm: boolean;
 }
 export declare class Application {
     app: express.Express;

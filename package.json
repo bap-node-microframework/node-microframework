@@ -24,6 +24,7 @@
     "file-stream-rotator": "0.0.6",
     "forms": "^1.1.4",
     "js-yaml": "^3.4.3",
+    "mongoose": "^4.4.19",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
     "oauth2-server": "^2.4.1",

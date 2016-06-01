@@ -7,6 +7,7 @@ var cors = require('cors');
 var multer = require("multer");
 var config = require('config');
 var Sequelize = require('sequelize');
+var Mongoose = require('mongoose');
 var SocketIO = require("socket.io");
 var Http = require("http");
 var express = require("express");
@@ -37,6 +38,10 @@ var Application = (function () {
                 }
             });
             container_1.Container.registerService('sequelize', sequelize);
+        }
+        if (options.odm) {
+            var mongoose = Mongoose.connect(config.get('odm.dsn').toString());
+            container_1.Container.registerService('mongoose', mongoose);
         }
         kernel.boot(this.app, options.sockets ? io : null);
         if (options.oauth) {

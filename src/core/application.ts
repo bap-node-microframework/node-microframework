@@ -6,6 +6,7 @@ import * as cors from 'cors';
 import * as multer from "multer";
 import * as config from 'config';
 import * as Sequelize from 'sequelize';
+import * as Mongoose from 'mongoose';
 import * as SocketIO from "socket.io";
 import * as Http from "http";
 import * as express from "express";
@@ -16,7 +17,8 @@ export interface ApplicationOptions {
     cors: boolean,
     sockets: boolean,
     oauth: boolean,
-    orm: boolean
+    orm: boolean,
+    odm: boolean
 }
 
 export class Application {
@@ -53,6 +55,11 @@ export class Application {
                 }
             });
             Container.registerService('sequelize', sequelize);
+        }
+
+        if (options.odm) {
+            var mongoose = Mongoose.connect(config.get('odm.dsn').toString());
+            Container.registerService('mongoose', mongoose);
         }
 
         kernel.boot(this.app, options.sockets ? io : null);

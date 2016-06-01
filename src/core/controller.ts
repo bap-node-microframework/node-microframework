@@ -1,10 +1,12 @@
 import { Container } from './container';
 import * as Sequelize from 'sequelize';
+import * as Mongoose from 'mongoose';
 
 export abstract class BaseController {
     req: any;
     res: any;
     sequelize: Sequelize.Sequelize;
+    mongoose: Mongoose.Mongoose;
 
     static router: any;
 
