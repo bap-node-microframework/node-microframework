@@ -15,6 +15,10 @@ export class Container {
         this.services[serviceName] = service;
     }
 
+    static debugServices() {
+        console.log(Object.keys(this.services));
+    }
+
     static get(serviceName) {
         return this.services[serviceName];
     }

@@ -11,6 +11,9 @@ var Container = (function () {
     Container.registerService = function (serviceName, service) {
         this.services[serviceName] = service;
     };
+    Container.debugServices = function () {
+        console.log(Object.keys(this.services));
+    };
     Container.get = function (serviceName) {
         return this.services[serviceName];
     };
