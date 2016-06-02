@@ -5,8 +5,6 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as multer from "multer";
 import * as config from 'config';
-import * as Sequelize from 'sequelize';
-import * as Mongoose from 'mongoose';
 import * as SocketIO from "socket.io";
 import * as Http from "http";
 import * as express from "express";
@@ -16,17 +14,17 @@ import { KernelInterface } from './KernelInterface';
 export interface ApplicationOptions {
     cors: boolean,
     sockets: boolean,
-    oauth: boolean,
-    orm: boolean,
-    odm: boolean
+    oauth: boolean
 }
 
 export class Application {
     app: express.Express;
     httpServer: Http.Server
+    plugins: any;
 
-    constructor(options: ApplicationOptions, kernel: KernelInterface) {
+    constructor(options: ApplicationOptions, kernel: KernelInterface, plugins) {
         this.app = express();
+        this.plugins = [];
         this.httpServer = Http.createServer(this.app);
 
         Container.setParameter('rootDirectory', Container.getParameter('appDirectory') + path.sep + '..');
@@ -35,31 +33,14 @@ export class Application {
         this.registerParsers();
         this.registerLogger();
 
+        plugins.forEach(plugin => this.registerPlugin(plugin));
+
         if (options.cors) {
             this.registerCors();
         }
 
         if (options.sockets) {
             var io = this.registerSocketIO();
-        }
-
-        if (options.orm) {
-            // Register DB
-            var sequelize = new Sequelize(config.get('orm.dsn').toString(), {
-                logging: (process.env.DEBUG || config.get('orm.debug')) ? console.log : false,
-                define: {
-                    timestamps: false
-                },
-                dialectOptions: {
-                    multipleStatements: true
-                }
-            });
-            Container.registerService('sequelize', sequelize);
-        }
-
-        if (options.odm) {
-            var mongoose = Mongoose.connect(config.get('odm.dsn').toString());
-            Container.registerService('mongoose', mongoose);
         }
 
         kernel.boot(this.app, options.sockets ? io : null);
@@ -107,5 +88,9 @@ export class Application {
 
     private registerOauthErrorHandler() {
         this.app.use(Container.get('oauth').errorHandler());
+    }
+
+    private registerPlugin(plugin) {
+        this.plugins.push(plugin);
     }
 }

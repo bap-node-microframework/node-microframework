@@ -1,11 +1,8 @@
 "use strict";
-var container_1 = require('./container');
 var Module = (function () {
     function Module(app, io) {
         var _this = this;
         this.app = app;
-        this.sequelize = container_1.Container.get('sequelize');
-        this.mongoose = container_1.Container.get('mongoose');
         this.registerServices();
         this.registerControllers();
         this.registerModels();

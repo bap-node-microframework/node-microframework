@@ -1,8 +1,7 @@
-
 export class Container {
-    static models:Object = {}
-    static services:Object = {}
-    static parameters:Object = {}
+    static models: Object = {}
+    static services: Object = {}
+    static parameters: Object = {}
 
     static registerModel(modelName, model) {
         this.models[modelName] = model;

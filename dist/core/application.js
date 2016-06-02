@@ -6,42 +6,26 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var multer = require("multer");
 var config = require('config');
-var Sequelize = require('sequelize');
-var Mongoose = require('mongoose');
 var SocketIO = require("socket.io");
 var Http = require("http");
 var express = require("express");
 var path = require('path');
 var Application = (function () {
-    function Application(options, kernel) {
+    function Application(options, kernel, plugins) {
+        var _this = this;
         this.app = express();
+        this.plugins = [];
         this.httpServer = Http.createServer(this.app);
         container_1.Container.setParameter('rootDirectory', container_1.Container.getParameter('appDirectory') + path.sep + '..');
         container_1.Container.registerService('app', this.app);
         this.registerParsers();
         this.registerLogger();
+        plugins.forEach(function (plugin) { return _this.registerPlugin(plugin); });
         if (options.cors) {
             this.registerCors();
         }
         if (options.sockets) {
             var io = this.registerSocketIO();
-        }
-        if (options.orm) {
-            // Register DB
-            var sequelize = new Sequelize(config.get('orm.dsn').toString(), {
-                logging: (process.env.DEBUG || config.get('orm.debug')) ? console.log : false,
-                define: {
-                    timestamps: false
-                },
-                dialectOptions: {
-                    multipleStatements: true
-                }
-            });
-            container_1.Container.registerService('sequelize', sequelize);
-        }
-        if (options.odm) {
-            var mongoose = Mongoose.connect(config.get('odm.dsn').toString());
-            container_1.Container.registerService('mongoose', mongoose);
         }
         kernel.boot(this.app, options.sockets ? io : null);
         if (options.oauth) {
@@ -79,6 +63,9 @@ var Application = (function () {
     };
     Application.prototype.registerOauthErrorHandler = function () {
         this.app.use(container_1.Container.get('oauth').errorHandler());
+    };
+    Application.prototype.registerPlugin = function (plugin) {
+        this.plugins.push(plugin);
     };
     return Application;
 }());

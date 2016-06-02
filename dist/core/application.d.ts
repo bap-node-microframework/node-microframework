@@ -5,17 +5,17 @@ export interface ApplicationOptions {
     cors: boolean;
     sockets: boolean;
     oauth: boolean;
-    orm: boolean;
-    odm: boolean;
 }
 export declare class Application {
     app: express.Express;
     httpServer: Http.Server;
-    constructor(options: ApplicationOptions, kernel: KernelInterface);
+    plugins: any;
+    constructor(options: ApplicationOptions, kernel: KernelInterface, plugins: any);
     start(): void;
     private registerParsers();
     private registerLogger();
     private registerCors();
     private registerSocketIO();
     private registerOauthErrorHandler();
+    private registerPlugin(plugin);
 }

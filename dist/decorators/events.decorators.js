@@ -18,9 +18,7 @@ function EventSubscriber() {
         if (!target.constructor.eventListeners) {
             target.constructor.eventListeners = {};
         }
-        console.log(target);
         target.registerEventListeners = function (dispatcher) {
-            console.log(',,,', this.eventListeners);
             var _loop_1 = function() {
                 var on = this_1.eventListeners[event];
                 dispatcher.on(event, function onEvent() {
