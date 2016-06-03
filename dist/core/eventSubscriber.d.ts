@@ -1,4 +1,3 @@
-export declare abstract class EventSubscriber {
-    static eventListeners: any;
+export declare class BaseEventSubscriber {
     static registerEventListeners(dispatcher: any): void;
 }
