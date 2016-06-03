@@ -22,7 +22,7 @@ export class Application {
     httpServer: Http.Server
     plugins: any;
 
-    constructor(options: ApplicationOptions, kernel: KernelInterface, plugins) {
+    constructor(options: ApplicationOptions, kernel: KernelInterface) {
         this.app = express();
         this.plugins = [];
         this.httpServer = Http.createServer(this.app);
@@ -32,8 +32,6 @@ export class Application {
 
         this.registerParsers();
         this.registerLogger();
-
-        plugins.forEach(plugin => this.registerPlugin(plugin));
 
         if (options.cors) {
             this.registerCors();
@@ -90,7 +88,7 @@ export class Application {
         this.app.use(Container.get('oauth').errorHandler());
     }
 
-    private registerPlugin(plugin) {
+    public registerPlugin(plugin) {
         this.plugins.push(plugin);
     }
 }

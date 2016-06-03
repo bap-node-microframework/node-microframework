@@ -10,12 +10,12 @@ export declare class Application {
     app: express.Express;
     httpServer: Http.Server;
     plugins: any;
-    constructor(options: ApplicationOptions, kernel: KernelInterface, plugins: any);
+    constructor(options: ApplicationOptions, kernel: KernelInterface);
     start(): void;
     private registerParsers();
     private registerLogger();
     private registerCors();
     private registerSocketIO();
     private registerOauthErrorHandler();
-    private registerPlugin(plugin);
+    registerPlugin(plugin: any): void;
 }

@@ -11,8 +11,7 @@ var Http = require("http");
 var express = require("express");
 var path = require('path');
 var Application = (function () {
-    function Application(options, kernel, plugins) {
-        var _this = this;
+    function Application(options, kernel) {
         this.app = express();
         this.plugins = [];
         this.httpServer = Http.createServer(this.app);
@@ -20,7 +19,6 @@ var Application = (function () {
         container_1.Container.registerService('app', this.app);
         this.registerParsers();
         this.registerLogger();
-        plugins.forEach(function (plugin) { return _this.registerPlugin(plugin); });
         if (options.cors) {
             this.registerCors();
         }
