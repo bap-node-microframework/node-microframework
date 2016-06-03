@@ -1,23 +1,11 @@
 "use strict";
-var EventSubscriber = (function () {
-    function EventSubscriber() {
+var BaseEventSubscriber = (function () {
+    function BaseEventSubscriber() {
     }
-    EventSubscriber.registerEventListeners = function (dispatcher) {
-        var _loop_1 = function() {
-            var on = this_1.eventListeners[event];
-            dispatcher.on(event, function onEvent() {
-                var mainArguments = Array.prototype.slice.call(arguments);
-                mainArguments.push(dispatcher);
-                on.apply(null, mainArguments);
-            });
-        };
-        var this_1 = this;
-        for (var event in this.eventListeners) {
-            _loop_1();
-        }
+    BaseEventSubscriber.registerEventListeners = function (dispatcher) {
+        // For signature of @EventSubscriber
     };
-    EventSubscriber.eventListeners = {};
-    return EventSubscriber;
+    return BaseEventSubscriber;
 }());
-exports.EventSubscriber = EventSubscriber;
+exports.BaseEventSubscriber = BaseEventSubscriber;
 //# sourceMappingURL=eventSubscriber.js.map
