@@ -15,7 +15,7 @@ export function RequestParam(...getArgs) {
         descriptor.value = (req, res) => {
 
             // param not nullable and null => error
-            if (!isNullable && !req.params[aName]) {
+            if (!isNullable && !req.body[aName]) {
                 return res.status(400).json({
                     error: "parameter " + aName + " is required"
                 });
@@ -24,15 +24,15 @@ export function RequestParam(...getArgs) {
             // param not nullable and not valid => error
             if (requirements) {
                 let regex = new RegExp(requirements, "g");
-                if (req.params[aName] && !regex.test(req.params[aName])) {
+                if (req.body[aName] && !regex.test(req.body[aName])) {
                     return res.status(400).json({
-                        error: "parameter " + aName + " match " + requirements
+                        error: "parameter " + aName + " should match " + requirements
                     });
                 }
             }
 
             // isNullable and null => default value
-            if (isNullable && !req.params[aName]) {
+            if (isNullable && !req.body[aName]) {
                 req.query[aName] = defaultValue;
             }
 

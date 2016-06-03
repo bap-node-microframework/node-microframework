@@ -7,7 +7,10 @@ function Get() {
         getArgs[_i - 0] = arguments[_i];
     }
     return function (target, name, descriptor) {
-        if (container_1.Container.has('oauth')) {
+        var options = getArgs[1] || {
+            authenticated: true
+        };
+        if (container_1.Container.has('oauth') && options.authenticated) {
             router.get(getArgs[0], container_1.Container.get('oauth').authorise(), function (req, res) { return descriptor.value(req, res); });
             return;
         }

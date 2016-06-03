@@ -4,7 +4,11 @@ let router = Container.get('router');
 
 export function Get(...getArgs) {
     return function(target, name, descriptor) {
-        if (Container.has('oauth')) {
+        let options = getArgs[1] || {
+            authenticated: true
+        };
+
+        if (Container.has('oauth') && options.authenticated) {
             router.get(getArgs[0], Container.get('oauth').authorise(), (req, res) => descriptor.value(req, res));
             return;
         }
