@@ -12,7 +12,10 @@ var Container = (function () {
         this.services[serviceName] = service;
     };
     Container.debugServices = function () {
-        console.log(Object.keys(this.services));
+        var _this = this;
+        Object.keys(this.services).forEach(function (service, i) {
+            console.log(i + 1 + ") Name: " + service + "\t\t Class: " + _this.services[service].constructor.name);
+        });
     };
     Container.get = function (serviceName) {
         return this.services[serviceName];

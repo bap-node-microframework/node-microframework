@@ -16,7 +16,9 @@ export class Container {
     }
 
     static debugServices() {
-        console.log(Object.keys(this.services));
+        Object.keys(this.services).forEach((service, i) => {
+            console.log(i + 1 + ") Name: " + service + "\t\t Class: " + this.services[service].constructor.name);
+        });
     }
 
     static get(serviceName) {
