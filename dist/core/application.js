@@ -3,7 +3,6 @@
 var logger_1 = require("./logger");
 var container_1 = require('./container');
 var bodyParser = require('body-parser');
-var cors = require('cors');
 var multer = require("multer");
 var config = require('config');
 var SocketIO = require("socket.io");
@@ -21,9 +20,6 @@ var Application = (function () {
         container_1.Container.registerService('app', this.app);
         this.registerParsers();
         this.registerLogger();
-        if (options.cors) {
-            this.registerCors();
-        }
         if (options.sockets) {
             this.io = this.registerSocketIO();
         }
@@ -45,16 +41,6 @@ var Application = (function () {
     Application.prototype.registerLogger = function () {
         container_1.Container.setParameter('logDirectory', container_1.Container.getParameter('rootDirectory') + path.sep + 'logs');
         this.app.use(logger_1.Logger.register(config));
-    };
-    Application.prototype.registerCors = function () {
-        // Cors
-        var corsOptions = {
-            credentials: true,
-            origin: function (origin, callback) {
-                callback(null, true);
-            }
-        };
-        this.app.use(cors(corsOptions));
     };
     Application.prototype.registerSocketIO = function () {
         var io = SocketIO(this.httpServer);

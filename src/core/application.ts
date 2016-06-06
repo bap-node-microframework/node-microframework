@@ -2,7 +2,6 @@
 import { Logger } from "./logger";
 import { Container } from './container';
 import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
 import * as multer from "multer";
 import * as config from 'config';
 import * as SocketIO from "socket.io";
@@ -12,7 +11,6 @@ import * as path from 'path';
 import { KernelInterface } from './KernelInterface';
 
 export interface ApplicationOptions {
-    cors: boolean,
     sockets: boolean,
     oauth: boolean
 }
@@ -37,10 +35,6 @@ export class Application {
 
         this.registerParsers();
         this.registerLogger();
-
-        if (options.cors) {
-            this.registerCors();
-        }
 
         if (options.sockets) {
             this.io = this.registerSocketIO();
@@ -69,17 +63,6 @@ export class Application {
         Container.setParameter('logDirectory', Container.getParameter('rootDirectory') + path.sep + 'logs');
 
         this.app.use(Logger.register(config));
-    }
-
-    private registerCors() {
-        // Cors
-        var corsOptions = {
-            credentials: true,
-            origin: function(origin, callback) {
-                callback(null, true);
-            }
-        };
-        this.app.use(cors(corsOptions));
     }
 
     private registerSocketIO() {
