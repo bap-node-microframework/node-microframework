@@ -1,8 +1,7 @@
-
 export class Container {
-    static models:Object = {}
-    static services:Object = {}
-    static parameters:Object = {}
+    static models: Object = {}
+    static services: Object = {}
+    static parameters: Object = {}
 
     static registerModel(modelName, model) {
         this.models[modelName] = model;
@@ -14,6 +13,12 @@ export class Container {
 
     static registerService(serviceName, service) {
         this.services[serviceName] = service;
+    }
+
+    static debugServices() {
+        Object.keys(this.services).forEach((service, i) => {
+            console.log(i + 1 + ") Name: " + service + "\t\t Class: " + this.services[service].constructor.name);
+        });
     }
 
     static get(serviceName) {

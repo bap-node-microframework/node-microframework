@@ -3,3 +3,4 @@ typings
 .DS_Store
 app/**/*.js
 test/**/*.js
+npm-debug.log
