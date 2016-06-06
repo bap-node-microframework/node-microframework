@@ -21,11 +21,16 @@ export class Application {
     app: express.Express;
     httpServer: Http.Server
     plugins: any;
+    kernel: KernelInterface;
+    options: ApplicationOptions;
+    io: any;
 
     constructor(options: ApplicationOptions, kernel: KernelInterface) {
         this.app = express();
         this.plugins = [];
         this.httpServer = Http.createServer(this.app);
+        this.kernel = kernel;
+        this.options = options;
 
         Container.setParameter('rootDirectory', Container.getParameter('appDirectory') + path.sep + '..');
         Container.registerService('app', this.app);
@@ -38,10 +43,8 @@ export class Application {
         }
 
         if (options.sockets) {
-            var io = this.registerSocketIO();
+            this.io = this.registerSocketIO();
         }
-
-        kernel.boot(this.app, options.sockets ? io : null);
 
         if (options.oauth) {
             this.registerOauthErrorHandler()
@@ -49,6 +52,7 @@ export class Application {
     }
 
     start() {
+        this.kernel.boot(this.app, this.options.sockets ? this.io : null);
         this.httpServer.listen(process.env.PORT || 3000);
     }
 

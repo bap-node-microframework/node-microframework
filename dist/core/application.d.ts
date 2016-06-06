@@ -10,6 +10,9 @@ export declare class Application {
     app: express.Express;
     httpServer: Http.Server;
     plugins: any;
+    kernel: KernelInterface;
+    options: ApplicationOptions;
+    io: any;
     constructor(options: ApplicationOptions, kernel: KernelInterface);
     start(): void;
     private registerParsers();

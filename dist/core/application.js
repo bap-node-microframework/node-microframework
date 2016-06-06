@@ -15,6 +15,8 @@ var Application = (function () {
         this.app = express();
         this.plugins = [];
         this.httpServer = Http.createServer(this.app);
+        this.kernel = kernel;
+        this.options = options;
         container_1.Container.setParameter('rootDirectory', container_1.Container.getParameter('appDirectory') + path.sep + '..');
         container_1.Container.registerService('app', this.app);
         this.registerParsers();
@@ -23,14 +25,14 @@ var Application = (function () {
             this.registerCors();
         }
         if (options.sockets) {
-            var io = this.registerSocketIO();
+            this.io = this.registerSocketIO();
         }
-        kernel.boot(this.app, options.sockets ? io : null);
         if (options.oauth) {
             this.registerOauthErrorHandler();
         }
     }
     Application.prototype.start = function () {
+        this.kernel.boot(this.app, this.options.sockets ? this.io : null);
         this.httpServer.listen(process.env.PORT || 3000);
     };
     Application.prototype.registerParsers = function () {
