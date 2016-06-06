@@ -45,14 +45,15 @@ export class Application {
         if (options.sockets) {
             this.io = this.registerSocketIO();
         }
-
-        if (options.oauth) {
-            this.registerOauthErrorHandler()
-        }
     }
 
     start() {
         this.kernel.boot(this.app, this.options.sockets ? this.io : null);
+
+        if (this.options.oauth) {
+            this.registerOauthErrorHandler()
+        }
+
         this.httpServer.listen(process.env.PORT || 3000);
     }
 
