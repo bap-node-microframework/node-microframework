@@ -76,7 +76,8 @@ export class Application {
         this.app.use(Container.get('oauth').errorHandler());
     }
 
-    public registerPlugin(plugin) {
-        this.plugins.push(plugin);
+    public registerPlugin(plugin, options) {
+        let pluginInstance = new plugin(Container, options);
+        this.plugins[pluginInstance.getName] = pluginInstance;
     }
 }
