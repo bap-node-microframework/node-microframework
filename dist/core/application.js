@@ -50,8 +50,9 @@ var Application = (function () {
     Application.prototype.registerOauthErrorHandler = function () {
         this.app.use(container_1.Container.get('oauth').errorHandler());
     };
-    Application.prototype.registerPlugin = function (plugin) {
-        this.plugins.push(plugin);
+    Application.prototype.registerPlugin = function (plugin, options) {
+        var pluginInstance = new plugin(container_1.Container, options);
+        this.plugins[pluginInstance.getName] = pluginInstance;
     };
     return Application;
 }());

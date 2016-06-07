@@ -18,5 +18,5 @@ export declare class Application {
     private registerLogger();
     private registerSocketIO();
     private registerOauthErrorHandler();
-    registerPlugin(plugin: any): void;
+    registerPlugin(plugin: any, options: any): void;
 }
