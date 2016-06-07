@@ -4,3 +4,4 @@ export * from "./core/eventSubscriber";
 export * from "./core/logger";
 export * from "./core/module";
 export * from "./core/KernelInterface";
+export * from "./core/BaseController";
