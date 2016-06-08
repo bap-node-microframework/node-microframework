@@ -5,6 +5,9 @@ export class Container {
     static applicationContainer: any;
 
     static registerModel(modelName, model) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.registerModel(modelName, model);
+        }
         this.models[modelName] = model;
     }
 
@@ -16,6 +19,9 @@ export class Container {
     }
 
     static registerService(serviceName, service) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.registerService(serviceName, service);
+        }
         this.services[serviceName] = service;
     }
 
@@ -27,10 +33,16 @@ export class Container {
     }
 
     static has(serviceName) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.has(serviceName);
+        }
         return Object.keys(this.services).indexOf(serviceName) != -1;
     }
 
     static setParameter(name, value) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.setParameter(name, value);
+        }
         this.parameters[name] = value;
     }
 

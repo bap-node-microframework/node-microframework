@@ -3,6 +3,9 @@ var Container = (function () {
     function Container() {
     }
     Container.registerModel = function (modelName, model) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.registerModel(modelName, model);
+        }
         this.models[modelName] = model;
     };
     Container.getModel = function (modelName) {
@@ -12,6 +15,9 @@ var Container = (function () {
         return this.models[modelName];
     };
     Container.registerService = function (serviceName, service) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.registerService(serviceName, service);
+        }
         this.services[serviceName] = service;
     };
     Container.get = function (serviceName) {
@@ -21,9 +27,15 @@ var Container = (function () {
         return this.services[serviceName];
     };
     Container.has = function (serviceName) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.has(serviceName);
+        }
         return Object.keys(this.services).indexOf(serviceName) != -1;
     };
     Container.setParameter = function (name, value) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.setParameter(name, value);
+        }
         this.parameters[name] = value;
     };
     Container.getParameter = function (name) {
