@@ -9,6 +9,9 @@ export class Container {
     }
 
     static getModel(modelName) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.getModel(modelName);
+        }
         return this.models[modelName];
     }
 
@@ -17,6 +20,9 @@ export class Container {
     }
 
     static get(serviceName) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.get(serviceName);
+        }
         return this.services[serviceName];
     }
 
@@ -29,6 +35,9 @@ export class Container {
     }
 
     static getParameter(name) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.getParameter(name);
+        }
         return this.parameters[name];
     }
 

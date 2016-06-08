@@ -6,12 +6,18 @@ var Container = (function () {
         this.models[modelName] = model;
     };
     Container.getModel = function (modelName) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.getModel(modelName);
+        }
         return this.models[modelName];
     };
     Container.registerService = function (serviceName, service) {
         this.services[serviceName] = service;
     };
     Container.get = function (serviceName) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.get(serviceName);
+        }
         return this.services[serviceName];
     };
     Container.has = function (serviceName) {
@@ -21,6 +27,9 @@ var Container = (function () {
         this.parameters[name] = value;
     };
     Container.getParameter = function (name) {
+        if (this.applicationContainer) {
+            return this.applicationContainer.getParameter(name);
+        }
         return this.parameters[name];
     };
     Container.getApplicationInstance = function () {
