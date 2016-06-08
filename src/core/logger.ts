@@ -16,7 +16,8 @@ export class Logger {
         var accessLogStream = FileStreamRotator.getStream({
             filename: logDirectory + path.sep + (config.get('log.file_format') || 'access-%DATE%.log'),
             frequency: config.get('log.rotate.frequency') || 'daily',
-            verbose: config.get('log.verbose') || false
+            verbose: config.get('log.verbose') || false,
+            date_format: config.get('log.date_format') || 'YYYYMMDD'
         });
 
         let skip: any = function() { return false };
