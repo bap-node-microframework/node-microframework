@@ -7,7 +7,7 @@ export declare class Container {
     static getModel(modelName: any): any;
     static registerService(serviceName: any, service: any): any;
     static get(serviceName: any): any;
-    static has(serviceName: any): any;
+    static has(serviceName: any): boolean;
     static setParameter(name: any, value: any): any;
     static getParameter(name: any): any;
     static getApplicationInstance(): any;

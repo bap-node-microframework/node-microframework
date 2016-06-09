@@ -6,49 +6,49 @@ export class Container {
 
     static registerModel(modelName, model) {
         if (this.applicationContainer) {
-            return this.applicationContainer.registerModel(modelName, model);
+            return this.applicationContainer.models[modelName] = model;
         }
         this.models[modelName] = model;
     }
 
     static getModel(modelName) {
         if (this.applicationContainer) {
-            return this.applicationContainer.getModel(modelName);
+            return this.applicationContainer.models[modelName];
         }
         return this.models[modelName];
     }
 
     static registerService(serviceName, service) {
         if (this.applicationContainer) {
-            return this.applicationContainer.registerService(serviceName, service);
+            return this.applicationContainer.services[serviceName] = service;
         }
         this.services[serviceName] = service;
     }
 
     static get(serviceName) {
         if (this.applicationContainer) {
-            return this.applicationContainer.get(serviceName);
+            return this.applicationContainer.services[serviceName];
         }
         return this.services[serviceName];
     }
 
     static has(serviceName) {
         if (this.applicationContainer) {
-            return this.applicationContainer.has(serviceName);
+            return Object.keys(this.applicationContainer.services).indexOf(serviceName) != -1;
         }
         return Object.keys(this.services).indexOf(serviceName) != -1;
     }
 
     static setParameter(name, value) {
         if (this.applicationContainer) {
-            return this.applicationContainer.setParameter(name, value);
+            return this.applicationContainer.parameters[name] = value;
         }
         this.parameters[name] = value;
     }
 
     static getParameter(name) {
         if (this.applicationContainer) {
-            return this.applicationContainer.getParameter(name);
+            return this.applicationContainer.parameters[name];
         }
         return this.parameters[name];
     }
