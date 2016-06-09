@@ -12,7 +12,7 @@ export class Container {
     }
 
     static getModel(modelName) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && this.applicationContainer.models[modelName]) {
             return this.applicationContainer.models[modelName];
         }
         return this.models[modelName];
@@ -26,14 +26,14 @@ export class Container {
     }
 
     static get(serviceName) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && this.applicationContainer.services[serviceName]) {
             return this.applicationContainer.services[serviceName];
         }
         return this.services[serviceName];
     }
 
     static has(serviceName) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && Object.keys(this.applicationContainer.services).indexOf(serviceName) != -1) {
             return Object.keys(this.applicationContainer.services).indexOf(serviceName) != -1;
         }
         return Object.keys(this.services).indexOf(serviceName) != -1;
@@ -47,7 +47,7 @@ export class Container {
     }
 
     static getParameter(name) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && this.applicationContainer.parameters[name]) {
             return this.applicationContainer.parameters[name];
         }
         return this.parameters[name];

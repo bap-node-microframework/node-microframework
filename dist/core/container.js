@@ -9,7 +9,7 @@ var Container = (function () {
         this.models[modelName] = model;
     };
     Container.getModel = function (modelName) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && this.applicationContainer.models[modelName]) {
             return this.applicationContainer.models[modelName];
         }
         return this.models[modelName];
@@ -21,13 +21,13 @@ var Container = (function () {
         this.services[serviceName] = service;
     };
     Container.get = function (serviceName) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && this.applicationContainer.services[serviceName]) {
             return this.applicationContainer.services[serviceName];
         }
         return this.services[serviceName];
     };
     Container.has = function (serviceName) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && Object.keys(this.applicationContainer.services).indexOf(serviceName) != -1) {
             return Object.keys(this.applicationContainer.services).indexOf(serviceName) != -1;
         }
         return Object.keys(this.services).indexOf(serviceName) != -1;
@@ -39,7 +39,7 @@ var Container = (function () {
         this.parameters[name] = value;
     };
     Container.getParameter = function (name) {
-        if (this.applicationContainer) {
+        if (this.applicationContainer && this.applicationContainer.parameters[name]) {
             return this.applicationContainer.parameters[name];
         }
         return this.parameters[name];
