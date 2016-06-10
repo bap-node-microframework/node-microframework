@@ -29,7 +29,7 @@ function RequestParam() {
             }
             // isNullable and null => default value
             if (isNullable && !req.body[aName]) {
-                req.query[aName] = defaultValue;
+                req.body[aName] = defaultValue;
             }
             return oldValue(req, res);
         };
