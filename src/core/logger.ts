@@ -28,7 +28,29 @@ export class Logger {
             };
         }
 
-        return morgan('combined', {
+          morgan.format('bapformat', function bapFormatLine (tokens, req, res){
+            var status = res._header
+                ? res.statusCode
+                : undefined;
+
+            var colorStatus = status >= 500 ? 31 // red
+                : status >= 400 ? 33 // yellow
+                : status >= 300 ? 36 // cyan
+                : status >= 200 ? 32 // green
+                : 0;  // no color
+
+            var fn = bapFormatLine[colorStatus];
+
+            if (!fn) {
+                // compile
+                fn = bapFormatLine[colorStatus] = morgan.compile('\x1b[0m:date[iso] \x1b[0;1m:method \x1b[0m:url \x1b[' +
+                colorStatus + 'm:status \x1b[0;3m:response-time ms - :res[content-length] - :user-agent \x1b[0m')
+            }
+
+            return fn(tokens, req, res);
+        });
+
+        return morgan(config.get('log.format') || 'bapformat', {
             stream: accessLogStream,
             skip: skip
         });
