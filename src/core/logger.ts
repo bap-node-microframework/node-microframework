@@ -29,9 +29,7 @@ export class Logger {
         }
 
           morgan.format('bapformat', function bapFormatLine (tokens, req, res){
-            var status = res._header
-                ? res.statusCode
-                : undefined;
+            var status = res.statusCode;
 
             var colorStatus = status >= 500 ? 31 // red
                 : status >= 400 ? 33 // yellow
