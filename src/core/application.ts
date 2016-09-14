@@ -25,6 +25,7 @@ export class Application {
 
     constructor(options: ApplicationOptions, kernel: KernelInterface) {
         this.app = express();
+        this.app.set("container", Container);
         this.plugins = [];
         this.httpServer = Http.createServer(this.app);
         this.kernel = kernel;
